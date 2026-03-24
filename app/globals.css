@@ -17,3 +17,74 @@ body {
   background: rgba(236, 72, 153, 0.45);
   color: #fff;
 }
+
+.portfolio-shell {
+  transform: translateZ(0);
+}
+
+.hero-enter,
+.hero-enter-delay,
+.card-enter,
+.profile-frame {
+  animation-fill-mode: both;
+}
+
+.hero-enter {
+  animation: rise-in 780ms cubic-bezier(0.22, 1, 0.36, 1) 80ms;
+}
+
+.hero-enter-delay {
+  animation: rise-in 900ms cubic-bezier(0.22, 1, 0.36, 1) 180ms;
+}
+
+.card-enter {
+  opacity: 0;
+  animation: card-in 760ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.profile-frame {
+  animation: soft-pulse 6s ease-in-out infinite;
+}
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes card-in {
+  from {
+    opacity: 0;
+    transform: translateY(24px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes soft-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.18);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(255, 255, 255, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-enter,
+  .hero-enter-delay,
+  .card-enter,
+  .profile-frame {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
