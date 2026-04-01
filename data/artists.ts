@@ -5,18 +5,12 @@ import spotifyImg from "../assets/spotifyImg.png";
 import deezerImg from "../assets/deezerImg.jpg";
 import youtubeImg from "../assets/youtubeImg.png";
 import appleMusicImg from "../assets/apple.jpg";
-/*import audiomackImg from "../assets/audiomack.png";
-import boomplayImg from "../assets/boomplay.png";
-import soundcloudImg from "../assets/soundcloud.png";
-import tiktokImg from "../assets/tiktok.png";
-import instagramImg from "../assets/instagram.png";*/
 import facebookImg from "../assets/facebookImg.jpg";
-
 
 // IMAGES ARTISTE
 import cover from "../assets/cover.jpg";
 import profile from "../assets/profile.jpg";
-import index from "../assets/index.jpg";
+import artwork from "../assets/index.jpg";
 
 export const platformOrder = [
   "spotify",
@@ -34,15 +28,13 @@ export const platformOrder = [
 
 export type PlatformKey = (typeof platformOrder)[number];
 
-export const platformImages: Record<PlatformKey, StaticImageData> = {
+// ✅ CORRECTION IMPORTANTE : Partial
+export const platformImages: Partial<Record<PlatformKey, StaticImageData>> = {
   spotify: spotifyImg,
   deezer: deezerImg,
   youtube: youtubeImg,
   appleMusic: appleMusicImg,
-
-
-  facebook: facebookImg,
-
+  facebook: facebookImg
 };
 
 export type ArtistLinks = Partial<Record<PlatformKey, string>>;
@@ -87,28 +79,37 @@ export const artists: Artist[] = [
       "Artiste burkinabè reconnu pour ses textes conscients, son identité forte et son impact majeur sur la scène musicale africaine.",
     story:
       "Smarty est l’une des figures les plus marquantes du rap au Burkina Faso. Son univers mêle engagement, profondeur, élégance artistique et puissance scénique. Cette page NFC met en avant son identité, son image et ses principales plateformes d’écoute dans une expérience mobile premium.",
+
     coverImage: cover,
     coverAlt: "Photo de couverture de Smarty",
+
     profileImage: profile,
     profileAlt: "Photo de profil de Smarty",
-    artworkImage: index,
+
+    artworkImage: artwork,
     artworkAlt: "Illustration artistique de Smarty",
+
     ctaLabel: "Écouter maintenant",
     ctaUrl: "https://music.apple.com/artist/smarty",
+
     featuredRelease: {
       title: "Smarty · Artiste officiel",
       subtitle: "Retrouve sa musique sur les plateformes de streaming"
     },
+
     contactEmail: "contact@smarty.bf",
+
     secondaryNetworks: [
       { label: "Instagram", url: "https://www.instagram.com/" },
       { label: "Facebook", url: "https://www.facebook.com/" }
     ],
+
     links: {
       appleMusic: "https://music.apple.com/artist/smarty",
       spotify: "https://open.spotify.com/artist/2Yk",
       deezer: "https://www.deezer.com/artist/124"
     },
+
     theme: {
       primary: "#d4af37",
       secondary: "#0b0b0f",
