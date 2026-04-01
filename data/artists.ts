@@ -1,3 +1,23 @@
+import type { StaticImageData } from "next/image";
+
+// IMAGES DES PLATEFORMES
+import spotifyImg from "../assets/spotifyImg.png";
+import deezerImg from "../assets/deezerImg.jpg";
+import youtubeImg from "../assets/youtubeImg.png";
+import appleMusicImg from "../assets/apple.jpg";
+/*import audiomackImg from "../assets/audiomack.png";
+import boomplayImg from "../assets/boomplay.png";
+import soundcloudImg from "../assets/soundcloud.png";
+import tiktokImg from "../assets/tiktok.png";
+import instagramImg from "../assets/instagram.png";*/
+import facebookImg from "../assets/facebookImg.jpg";
+
+
+// IMAGES ARTISTE
+import cover from "../assets/cover.jpg";
+import profile from "../assets/profile.jpg";
+import index from "../assets/index.jpg";
+
 export const platformOrder = [
   "spotify",
   "deezer",
@@ -14,6 +34,17 @@ export const platformOrder = [
 
 export type PlatformKey = (typeof platformOrder)[number];
 
+export const platformImages: Record<PlatformKey, StaticImageData> = {
+  spotify: spotifyImg,
+  deezer: deezerImg,
+  youtube: youtubeImg,
+  appleMusic: appleMusicImg,
+
+
+  facebook: facebookImg,
+
+};
+
 export type ArtistLinks = Partial<Record<PlatformKey, string>>;
 
 export type ArtistTheme = {
@@ -29,11 +60,11 @@ export type Artist = {
   tagline: string;
   shortBio: string;
   story: string;
-  coverImage: string;
+  coverImage: StaticImageData;
   coverAlt: string;
-  profileImage: string;
+  profileImage: StaticImageData;
   profileAlt: string;
-  artworkImage: string;
+  artworkImage: StaticImageData;
   artworkAlt: string;
   ctaLabel: string;
   ctaUrl: string;
@@ -49,54 +80,45 @@ export type Artist = {
 
 export const artists: Artist[] = [
   {
-    slug: "luna-kaze",
-    name: "Luna Kaze",
-    tagline: "Électro-cinématique entre lumière et vertige",
-    shortBio: "Productrice, autrice et performeuse live entre synthwave et pop futuriste.",
+    slug: "smarty",
+    name: "Smarty",
+    tagline: "Voix engagée du rap burkinabè",
+    shortBio:
+      "Artiste burkinabè reconnu pour ses textes conscients, son identité forte et son impact majeur sur la scène musicale africaine.",
     story:
-      "Luna Kaze façonne une pop nocturne immersive, entre pulsations analogiques et nappes cinématiques. Son univers réunit mode, art visuel et storytelling musical pour une expérience premium pensée mobile-first.",
-    coverImage:
-      "https://images.unsplash.com/photo-1501386761578-eac5c94b800a?auto=format&fit=crop&w=1800&q=80",
-    coverAlt: "Luna Kaze sur scène dans un halo lumineux violet",
-    profileImage:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=700&q=80",
-    profileAlt: "Portrait de Luna Kaze",
-    artworkImage:
-      "https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=900&q=80",
-    artworkAlt: "Artwork abstrait lumineux violet et bleu",
+      "Smarty est l’une des figures les plus marquantes du rap au Burkina Faso. Son univers mêle engagement, profondeur, élégance artistique et puissance scénique. Cette page NFC met en avant son identité, son image et ses principales plateformes d’écoute dans une expérience mobile premium.",
+    coverImage: cover,
+    coverAlt: "Photo de couverture de Smarty",
+    profileImage: profile,
+    profileAlt: "Photo de profil de Smarty",
+    artworkImage: index,
+    artworkAlt: "Illustration artistique de Smarty",
     ctaLabel: "Écouter maintenant",
-    ctaUrl: "https://open.spotify.com/",
+    ctaUrl: "https://music.apple.com/artist/smarty",
     featuredRelease: {
-      title: "Nouveau single · Neon Mirage",
-      subtitle: "Disponible sur toutes les plateformes"
+      title: "Smarty · Artiste officiel",
+      subtitle: "Retrouve sa musique sur les plateformes de streaming"
     },
-    contactEmail: "booking@lunakaze.com",
+    contactEmail: "contact@smarty.bf",
     secondaryNetworks: [
-      { label: "X / Twitter", url: "https://x.com" },
-      { label: "Threads", url: "https://www.threads.net" }
+      { label: "Instagram", url: "https://www.instagram.com/" },
+      { label: "Facebook", url: "https://www.facebook.com/" }
     ],
     links: {
-      spotify: "https://open.spotify.com/",
-      deezer: "https://www.deezer.com/",
-      youtube: "https://www.youtube.com/",
-      appleMusic: "https://music.apple.com/",
-      audiomack: "https://audiomack.com/",
-      boomplay: "https://www.boomplay.com/",
-      soundcloud: "https://soundcloud.com/",
-      tiktok: "https://www.tiktok.com/",
-      instagram: "https://www.instagram.com/",
-      facebook: "https://www.facebook.com/",
-      website: "https://example.com"
+      appleMusic: "https://music.apple.com/artist/smarty",
+      spotify: "https://open.spotify.com/artist/2Yk",
+      deezer: "https://www.deezer.com/artist/124"
     },
     theme: {
-      primary: "#7c3aed",
-      secondary: "#0f172a",
-      accent: "#ec4899",
-      surface: "rgba(15, 23, 42, 0.58)"
+      primary: "#d4af37",
+      secondary: "#0b0b0f",
+      accent: "#f59e0b",
+      surface: "rgba(18, 18, 24, 0.72)"
     }
   }
 ];
 
 export const featuredArtist = artists[0];
 
-export const getArtistBySlug = (slug: string) => artists.find((artist) => artist.slug === slug);
+export const getArtistBySlug = (slug: string) =>
+  artists.find((artist) => artist.slug === slug);
