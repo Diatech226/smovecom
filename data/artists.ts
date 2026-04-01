@@ -1,48 +1,102 @@
-export type PlatformKey = "facebook" | "deezer" | "spotify" | "youtube" | "tiktok";
+export const platformOrder = [
+  "spotify",
+  "deezer",
+  "youtube",
+  "appleMusic",
+  "audiomack",
+  "boomplay",
+  "soundcloud",
+  "tiktok",
+  "instagram",
+  "facebook",
+  "website"
+] as const;
+
+export type PlatformKey = (typeof platformOrder)[number];
 
 export type ArtistLinks = Partial<Record<PlatformKey, string>>;
+
+export type ArtistTheme = {
+  primary: string;
+  secondary: string;
+  accent: string;
+  surface: string;
+};
 
 export type Artist = {
   slug: string;
   name: string;
   tagline: string;
-  bio: string;
-  heroImage: string;
-  heroAlt: string;
+  shortBio: string;
+  story: string;
+  coverImage: string;
+  coverAlt: string;
+  profileImage: string;
+  profileAlt: string;
+  artworkImage: string;
+  artworkAlt: string;
+  ctaLabel: string;
+  ctaUrl: string;
+  featuredRelease: {
+    title: string;
+    subtitle: string;
+  };
+  contactEmail: string;
+  secondaryNetworks: Array<{ label: string; url: string }>;
   links: ArtistLinks;
+  theme: ArtistTheme;
 };
 
 export const artists: Artist[] = [
   {
     slug: "luna-kaze",
     name: "Luna Kaze",
-    tagline: "Électro-cinématique entre lumière et vertige.",
-    bio: "Luna Kaze compose des paysages sonores mêlant textures organiques, synthés analogiques et voix suspendues. Son univers visuel s'inspire de la nuit urbaine, des néons et des ciels cosmiques.",
-    heroImage:
-      "https://images.unsplash.com/photo-1511379938547-c1f69419868d?auto=format&fit=crop&w=1200&q=80",
-    heroAlt: "Luna Kaze sur scène avec une lumière violette immersive",
+    tagline: "Électro-cinématique entre lumière et vertige",
+    shortBio: "Productrice, autrice et performeuse live entre synthwave et pop futuriste.",
+    story:
+      "Luna Kaze façonne une pop nocturne immersive, entre pulsations analogiques et nappes cinématiques. Son univers réunit mode, art visuel et storytelling musical pour une expérience premium pensée mobile-first.",
+    coverImage:
+      "https://images.unsplash.com/photo-1501386761578-eac5c94b800a?auto=format&fit=crop&w=1800&q=80",
+    coverAlt: "Luna Kaze sur scène dans un halo lumineux violet",
+    profileImage:
+      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=700&q=80",
+    profileAlt: "Portrait de Luna Kaze",
+    artworkImage:
+      "https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=900&q=80",
+    artworkAlt: "Artwork abstrait lumineux violet et bleu",
+    ctaLabel: "Écouter maintenant",
+    ctaUrl: "https://open.spotify.com/",
+    featuredRelease: {
+      title: "Nouveau single · Neon Mirage",
+      subtitle: "Disponible sur toutes les plateformes"
+    },
+    contactEmail: "booking@lunakaze.com",
+    secondaryNetworks: [
+      { label: "X / Twitter", url: "https://x.com" },
+      { label: "Threads", url: "https://www.threads.net" }
+    ],
     links: {
-      facebook: "https://www.facebook.com/",
+      spotify: "https://open.spotify.com/",
       deezer: "https://www.deezer.com/",
-      spotify: "https://open.spotify.com/",
       youtube: "https://www.youtube.com/",
-      tiktok: ""
-    }
-  },
-  {
-    slug: "nael-river",
-    name: "Naël River",
-    tagline: "Pop alternative, intime et magnétique.",
-    bio: "Naël River explore les émotions brutes avec une pop moderne, des riffs subtils et des refrains émotionnels. Une signature artistique pensée pour la scène comme pour l'image.",
-    heroImage:
-      "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?auto=format&fit=crop&w=1200&q=80",
-    heroAlt: "Naël River en performance live avec guitare",
-    links: {
-      spotify: "https://open.spotify.com/",
-      youtube: "https://www.youtube.com/"
+      appleMusic: "https://music.apple.com/",
+      audiomack: "https://audiomack.com/",
+      boomplay: "https://www.boomplay.com/",
+      soundcloud: "https://soundcloud.com/",
+      tiktok: "https://www.tiktok.com/",
+      instagram: "https://www.instagram.com/",
+      facebook: "https://www.facebook.com/",
+      website: "https://example.com"
+    },
+    theme: {
+      primary: "#7c3aed",
+      secondary: "#0f172a",
+      accent: "#ec4899",
+      surface: "rgba(15, 23, 42, 0.58)"
     }
   }
 ];
 
-export const getArtistBySlug = (slug: string) => artists.find((artist) => artist.slug === slug);
 export const featuredArtist = artists[0];
+
+export const getArtistBySlug = (slug: string) => artists.find((artist) => artist.slug === slug);
