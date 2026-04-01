@@ -27,7 +27,7 @@ export async function generateMetadata({ params }: ArtistPageProps): Promise<Met
     openGraph: {
       title: `${artist.name} | Portfolio Artiste`,
       description: artist.tagline,
-      images: [artist.coverImage],
+      images: [artist.coverImage.src],
       type: "profile"
     }
   };
