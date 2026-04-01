@@ -23,11 +23,11 @@ export async function generateMetadata({ params }: ArtistPageProps): Promise<Met
 
   return {
     title: `${artist.name} | Portfolio Artiste`,
-    description: artist.bio,
+    description: artist.shortBio,
     openGraph: {
       title: `${artist.name} | Portfolio Artiste`,
       description: artist.tagline,
-      images: [artist.heroImage],
+      images: [artist.coverImage],
       type: "profile"
     }
   };

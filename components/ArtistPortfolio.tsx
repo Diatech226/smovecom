@@ -1,50 +1,106 @@
 import Image from "next/image";
-import { Artist, PlatformKey } from "@/data/artists";
+import { Artist, platformOrder } from "@/data/artists";
 import { SocialLinkCard } from "@/components/SocialLinkCard";
 
 type ArtistPortfolioProps = {
   artist: Artist;
 };
 
-const platforms: PlatformKey[] = ["facebook", "deezer", "spotify", "youtube", "tiktok"];
-
 export function ArtistPortfolio({ artist }: ArtistPortfolioProps) {
   return (
-    <main className="mx-auto flex w-full max-w-6xl flex-col gap-10 px-4 py-8 sm:px-8 sm:py-14">
-      <section className="relative overflow-hidden rounded-3xl border border-white/20 bg-white/8 p-4 shadow-2xl shadow-black/30 backdrop-blur-2xl sm:p-8">
-        <div className="grid items-center gap-8 lg:grid-cols-[1.2fr_1fr]">
-          <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-white/20">
-            <Image
-              src={artist.heroImage}
-              alt={artist.heroAlt}
-              fill
-              priority
-              className="object-cover"
-              sizes="(max-width: 768px) 100vw, 60vw"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#080b16]/70 via-transparent to-transparent" />
-          </div>
-
-          <div className="space-y-4">
-            <p className="inline-flex rounded-full border border-violet-200/30 bg-violet-400/15 px-3 py-1 text-xs font-medium uppercase tracking-[0.2em] text-violet-100">
-              Portfolio artiste
-            </p>
-            <h1 className="text-3xl font-semibold leading-tight text-white sm:text-5xl">{artist.name}</h1>
-            <p className="text-base font-medium text-fuchsia-100/90 sm:text-lg">{artist.tagline}</p>
-            <p className="max-w-2xl text-sm leading-relaxed text-slate-200 sm:text-base">{artist.bio}</p>
-          </div>
+    <main
+      className="portfolio"
+      style={{
+        ["--artist-primary" as string]: artist.theme.primary,
+        ["--artist-secondary" as string]: artist.theme.secondary,
+        ["--artist-accent" as string]: artist.theme.accent,
+        ["--artist-surface" as string]: artist.theme.surface
+      }}
+    >
+      <section className="cover-section">
+        <Image
+          src={artist.coverImage}
+          alt={artist.coverAlt}
+          fill
+          priority
+          className="cover-image"
+          sizes="100vw"
+        />
+        <div className="cover-overlay" />
+        <div className="cover-content">
+          <p className="kicker">Carte NFC · Expérience officielle</p>
+          <h1>{artist.name}</h1>
+          <p>{artist.tagline}</p>
         </div>
       </section>
 
-      <section className="rounded-3xl border border-white/15 bg-white/7 p-5 backdrop-blur-xl sm:p-7">
-        <h2 className="text-xl font-semibold text-white sm:text-2xl">Retrouver l&apos;artiste</h2>
-        <p className="mt-1 text-sm text-white/70">Toutes les plateformes officielles en un seul endroit.</p>
-        <div className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {platforms.map((platform) => (
+      <section className="identity-card fade-in">
+        <div className="identity-main">
+          <div className="profile-wrap">
+            <Image
+              src={artist.profileImage}
+              alt={artist.profileAlt}
+              width={180}
+              height={180}
+              className="profile-image"
+            />
+          </div>
+          <div>
+            <h2>{artist.name}</h2>
+            <p className="identity-bio">{artist.shortBio}</p>
+            <p className="identity-story">{artist.story}</p>
+          </div>
+        </div>
+
+        <aside className="artwork-wrap">
+          <Image
+            src={artist.artworkImage}
+            alt={artist.artworkAlt}
+            width={320}
+            height={320}
+            className="artwork-image"
+          />
+        </aside>
+      </section>
+
+      <section className="release-card fade-in">
+        <p className="release-kicker">Projet récent</p>
+        <h3>{artist.featuredRelease.title}</h3>
+        <p>{artist.featuredRelease.subtitle}</p>
+        <a href={artist.ctaUrl} target="_blank" rel="noopener noreferrer" className="cta-button">
+          {artist.ctaLabel}
+        </a>
+      </section>
+
+      <section className="links-section fade-in">
+        <h3>Streaming & Réseaux</h3>
+        <p>Tous les liens officiels en accès direct.</p>
+        <div className="links-grid">
+          {platformOrder.map((platform) => (
             <SocialLinkCard key={platform} platform={platform} url={artist.links[platform]} />
           ))}
         </div>
       </section>
+
+      <footer className="footer fade-in">
+        <div>
+          <p className="footer-title">Contact / Booking</p>
+          <a href={`mailto:${artist.contactEmail}`}>{artist.contactEmail}</a>
+        </div>
+        <div>
+          <p className="footer-title">Réseaux secondaires</p>
+          <ul>
+            {artist.secondaryNetworks.map((network) => (
+              <li key={network.label}>
+                <a href={network.url} target="_blank" rel="noopener noreferrer">
+                  {network.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <p className="copyright">© {new Date().getFullYear()} {artist.name}. Tous droits réservés.</p>
+      </footer>
     </main>
   );
 }
